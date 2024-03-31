@@ -43,8 +43,6 @@ for i in range(r):
             water_q.append((i, j))
         elif MAP[i][j] == 'S':
             q.append((i, j))
-        elif MAP[i][j] == 'D':
-            destination = (i, j)
 
 cnt = 0
 bfs()
