@@ -1,28 +1,32 @@
-from collections import deque
 import sys
 input = sys.stdin.readline
-sys.setrecursionlimit(10**5)
+from collections import deque
 
-
-def dfs(s, visitedRoom, distance):
+def bfs(s):
     global maxDist
+    q = deque()
+    q.append((s,0))
+    visited = [False]*(n+1)
+    visited[1] = True
 
-    for relatedRoom, dist in room[s]:
-        if relatedRoom != visitedRoom:
-            dfs(relatedRoom, s, distance + dist)
+    while q :
+        now, dist = q.popleft()
 
-    maxDist = max(maxDist, distance)
-
+        for next, roomDist in room[now] :
+            if not visited[next] :
+                q.append((next, dist+roomDist))
+                visited[next] = True
+                maxDist = max(maxDist, dist+roomDist)
 
 n = int(input())
 
-room = [[] for _ in range(n + 1)]
-
-for _ in range(n - 1):
+room = [[] for _ in range(n+1)]
+for _ in range(n-1):
     A, B, C = map(int, input().split())
     room[A].append((B, C))
     room[B].append((A, C))
-
+    
+# print(room) #[[], [(2, 3)], [(1, 3), (3, 2), (4, 4)], [(2, 2)], [(2, 4)]]
 maxDist = 0
-dfs(1, 0, 0)
+bfs(1)
 print(maxDist)
