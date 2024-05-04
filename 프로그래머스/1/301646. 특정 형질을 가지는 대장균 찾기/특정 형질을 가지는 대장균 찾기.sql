@@ -1,0 +1,7 @@
+SELECT COUNT(*) AS COUNT
+FROM ECOLI_DATA
+WHERE GENOTYPE&5 AND !(GENOTYPE&2)
+
+# 형질 1 => 0001 => 1
+# 형질 2 => 0010 => 2 
+# 형질 3 => 0100 => 4
