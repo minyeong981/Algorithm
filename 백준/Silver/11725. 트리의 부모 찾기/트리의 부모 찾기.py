@@ -1,9 +1,9 @@
 import sys
+sys.setrecursionlimit(10**6)
 input = sys.stdin.readline
 
 def dfs(root, pList) :
     stack = [root]
-    visited = [False] * (N + 1)
     visited[root] = True
 
     while stack :
@@ -13,7 +13,8 @@ def dfs(root, pList) :
             if not visited[nodeC] :
                 visited[nodeC] = True
                 pList[nodeC] = nodeP
-                stack.append(nodeC)
+                dfs(nodeC, pList)
+
 
 N = int(input())
 G = [[] for _ in range(N + 1)]
