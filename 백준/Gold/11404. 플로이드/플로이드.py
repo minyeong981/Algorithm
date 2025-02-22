@@ -9,10 +9,6 @@ def solve(G) :
                     G[i][j] = 0
                 elif G[i][k] != INF and G[k][j] != INF : # 가는 길이 있을 때
                     G[i][j] = min(G[i][j], G[i][k] + G[k][j])
-                elif G[i][k] != INF and G[k][j] == INF : # 출발지부터 중간 지점까지만 갈 수 있을 때
-                    G[i][k] = G[i][k]
-                elif G[i][k] == INF and G[k][j] != INF : # 중간 지점에서 도착지까지만 갈 수 있을 때
-                    G[k][j] = G[k][j]
 
     for r in range(1, n + 1) :
         for c in range(1, n + 1) :
