@@ -1,4 +1,5 @@
 import sys
+sys.setrecursionlimit(10**6)
 input = sys.stdin.readline
 
 def makeRoot(parent, root1, root2) :
