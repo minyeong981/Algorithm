@@ -13,7 +13,7 @@ def solve(X, K) :
             continue
 
         for nextC in path[city] :
-            if visited[nextC] == -1 and visited[nextC] + 1 < K :
+            if visited[nextC] == -1 :
                 visited[nextC] = visited[city] + 1
                 q.append(nextC)
 
