@@ -1,37 +1,36 @@
-#include <iostream>
-#include <queue>
-#include <string>
-using namespace std;
+#include <stdio.h>
+#include <string.h>
+
+int queue[10000];  // 큐 저장 배열
+int front = 0, back = 0;  // 큐의 앞/뒤 포인터
 
 int main() {
     int n;
-    cin >> n;
-    queue<int> q;
+    scanf("%d", &n);
 
     while (n--) {
-        string cmd;
-        cin >> cmd;
+        char cmd[10];  // 명령어 문자열 저장
+        scanf("%s", cmd);
 
-        if (cmd == "push") {
+        if (strcmp(cmd, "push") == 0) {
             int x;
-            cin >> x;
-            q.push(x);
-        } else if (cmd == "pop") {
-            if (q.empty()) cout << -1 << '\n';
-            else {
-                cout << q.front() << '\n';
-                q.pop();
-            }
-        } else if (cmd == "size") {
-            cout << q.size() << '\n';
-        } else if (cmd == "empty") {
-            cout << (q.empty() ? 1 : 0) << '\n';
-        } else if (cmd == "front") {
-            cout << (q.empty() ? -1 : q.front()) << '\n';
-        } else if (cmd == "back") {
-            cout << (q.empty() ? -1 : q.back()) << '\n';
+            scanf("%d", &x);
+            queue[back++] = x;  // 뒤에 값을 추가하고 back 증가
+        } else if (strcmp(cmd, "pop") == 0) {
+            if (front == back) printf("-1\n");  // 비어 있음
+            else printf("%d\n", queue[front++]);  // 앞에서 꺼냄
+        } else if (strcmp(cmd, "size") == 0) {
+            printf("%d\n", back - front);  // 큐에 있는 요소 수
+        } else if (strcmp(cmd, "empty") == 0) {
+            printf("%d\n", front == back ? 1 : 0);  // 비어 있으면 1
+        } else if (strcmp(cmd, "front") == 0) {
+            if (front == back) printf("-1\n");
+            else printf("%d\n", queue[front]);
+        } else if (strcmp(cmd, "back") == 0) {
+            if (front == back) printf("-1\n");
+            else printf("%d\n", queue[back - 1]);
         }
     }
-    
+
     return 0;
 }
