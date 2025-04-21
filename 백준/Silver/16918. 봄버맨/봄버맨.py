@@ -1,58 +1,32 @@
 import sys
-sys.setrecursionlimit(10**6)
 input = sys.stdin.readline
 
 r, c, n = map(int, input().split())
 arr = [list(input().strip()) for _ in range(r)]
 
-# 폭탄 설치 시간을 기록할 배열
-bomb_time = [[-1] * c for _ in range(r)]
+# 폭탄이 터진 후 상태 계산 함수
+def explode(arr):
+    result = [['O'] * c for _ in range(r)]
+    for x in range(r):
+        for y in range(c):
+            if arr[x][y] == 'O':
+                result[x][y] = '.'
+                for dx, dy in [(-1,0),(1,0),(0,-1),(0,1)]:
+                    nx, ny = x + dx, y + dy
+                    if 0 <= nx < r and 0 <= ny < c:
+                        result[nx][ny] = '.'
+    return result
 
-# 초기 폭탄은 0초에 설치된 것으로 간주
-for i in range(r):
-    for j in range(c):
-        if arr[i][j] == 'O':
-            bomb_time[i][j] = 0
+if n == 1:
+    for row in arr:
+        print(''.join(row))
+elif n % 2 == 0:
+    for _ in range(r):
+        print('O' * c)
+else:
+    after1 = explode(arr)
+    after2 = explode(after1)
 
-# 폭발 처리
-def explode(time):
-    to_explode = []
-    for i in range(r):
-        for j in range(c):
-            if bomb_time[i][j] != -1 and time - bomb_time[i][j] == 3:
-                to_explode.append((i, j))
-
-    for x, y in to_explode:
-        arr[x][y] = '.'
-        bomb_time[x][y] = -1
-        for dx, dy in [(-1,0),(1,0),(0,-1),(0,1)]:
-            nx, ny = x + dx, y + dy
-            if 0 <= nx < r and 0 <= ny < c:
-                if bomb_time[nx][ny] != -1 and time - bomb_time[nx][ny] != 3:
-                    arr[nx][ny] = '.'
-                    bomb_time[nx][ny] = -1
-
-# 폭탄 설치
-def install(time):
-    for i in range(r):
-        for j in range(c):
-            if arr[i][j] == '.':
-                arr[i][j] = 'O'
-                bomb_time[i][j] = time
-
-
-def simulate(time):
-    if time > n:
-        return
-
-    if time % 2 == 0:
-        install(time)
-    else:
-        explode(time)
-
-    simulate(time + 1)
-
-simulate(1)
-
-for row in arr:
-    print(''.join(row))
+    result = after1 if n % 4 == 3 else after2
+    for row in result:
+        print(''.join(row))
