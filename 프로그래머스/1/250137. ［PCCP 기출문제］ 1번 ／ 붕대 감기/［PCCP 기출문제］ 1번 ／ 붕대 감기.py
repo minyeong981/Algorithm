@@ -1,9 +1,3 @@
-'''
-t초 동안 붕대 감으면서 1초마다 x 만큼 체력 회복
-성공하면 y 체력 추가 회복
-(현재 체력이 최대 체력보다 커질 순 없음)
-
-'''
 def solution(bandage, health, attacks):
     answer = health
     lastTime = attacks[-1][0]
