@@ -1,52 +1,47 @@
-def get_index(s):
-    idx = 0
-    for l in range(1, len(s)):
-        idx += 26 ** l
-    for i in range(len(s)):
-        idx += (ord(s[i]) - ord('a')) * (26 ** (len(s) - i - 1))
-    return idx + 1
-
-def get_string_from_index(index):
-    total = 0
-    for length in range(1, 12):
-        count = 26 ** length
-        if total + count >= index:
-            offset = index - total - 1
-            s = ""
-            for _ in range(length):
-                s = chr(ord('a') + offset % 26) + s
-                offset //= 26
-            return s
-        total += count
-    return ""
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+def to_int(string):
+    l = len(string)
+    a = 0
+    for i in range(l):
+        a += (ord(string[l - 1 - i]) - 96) * pow(26,i)
+    return a
+def to_string(i):
+    s = ''
+    while i > 0:
+        i -= 1 
+        s = chr(i % 26 + 97) + s
+        i //= 26
+    return s
 
 def solution(n, bans):
-    # 1. 삭제된 문자열들의 사전 순 인덱스를 계산
-    banned_indices = sorted(get_index(b) for b in bans)
+    bans_sort = sorted(bans, key = lambda x: (len(x), x))
 
-    # 2. 이진 탐색
-    left, right = 1, 10**16
-    answer_idx = -1
-
-    def count_banned_leq(x):
-        # x보다 작거나 같은 삭제 인덱스 개수
-        lo, hi = 0, len(banned_indices)
-        while lo < hi:
-            mid = (lo + hi) // 2
-            if banned_indices[mid] <= x:
-                lo = mid + 1
-            else:
-                hi = mid
-        return lo
-
-    while left <= right:
-        mid = (left + right) // 2
-        banned_before = count_banned_leq(mid)
-        valid_count = mid - banned_before
-        if valid_count >= n:
-            answer_idx = mid
-            right = mid - 1
+    for b in bans_sort:
+        if to_int(b) <= n:
+            n += 1
         else:
-            left = mid + 1
-
-    return get_string_from_index(answer_idx)
+            break
+    return to_string(n)
