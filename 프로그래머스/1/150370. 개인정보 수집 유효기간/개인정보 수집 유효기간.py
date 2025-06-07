@@ -9,11 +9,11 @@ def solution(today, terms, privacies):
     
     for term in terms:
         kind, month = term.split()
-        term_dict[kind] = int(month)
+        term_dict[kind] = int(month) * 28
     
     for i, privacy in enumerate(privacies):
         date_str, kind = privacy.split()
-        expire_days = to_days(date_str) + term_dict[kind] * 28
+        expire_days = to_days(date_str) + term_dict[kind]
         if expire_days <= today_days:
             answer.append(i + 1)
     
