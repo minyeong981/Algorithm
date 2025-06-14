@@ -3,8 +3,8 @@ function solution(arr) {
         return [-1]
     } else {
         let minV = Math.min(...arr);
-        let result = arr.filter(ele => ele !== minV)
-        return result
+        arr.splice(arr.indexOf(minV), 1)
+        return arr
     }
     
 }
