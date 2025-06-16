@@ -14,6 +14,7 @@ rl.on('line', function (line) {
             answer += char.toUpperCase();
         }
     }
-}).on('close', function(){
     console.log(answer);
+    rl.close();
+}).on('close', function(){
 });
