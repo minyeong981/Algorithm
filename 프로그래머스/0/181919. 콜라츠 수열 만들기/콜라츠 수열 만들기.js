@@ -1,9 +1,10 @@
-function solution(n) {
-    let answer = [];
-    while (n > 0) {
-        answer.push(n);
-        if (n === 1) break;
-        (n % 2) ? (n = 3 * n + 1) : (n /= 2);
-    } 
+function solution(n, answer = []) {
+    answer.push(n);
+    if (n === 1) return answer;
+    if (n % 2) {
+        return solution(3 * n + 1, answer);
+    } else {
+        return solution(n/2, answer);
+    }
     return answer;
 }
