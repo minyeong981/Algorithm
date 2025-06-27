@@ -7,7 +7,7 @@ function solution(arr) {
             i += 1
         } else {
             const value = arr[i];
-            if (stk.at(-1) < value) {
+            if (stk.slice(-1) < value) {
                 stk.push(value)
                 i += 1
             } else {
