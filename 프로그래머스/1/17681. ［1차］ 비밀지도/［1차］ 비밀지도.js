@@ -6,7 +6,7 @@ function solution(n, arr1, arr2) {
         
         let secret = '';
         for (let ele of binary) {
-            ele === '1' ? secret += '#' : secret += ' ';
+            secret += (ele === '1') ? '#' : ' ';
         }
         answer.push(secret)
     }
