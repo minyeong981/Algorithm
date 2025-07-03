@@ -2,7 +2,7 @@ function solution(dartResult) {
     const queue = [];
     let number = '';
     for (const score of dartResult) {
-        if (/^[0-9]{1}$/.test(score)) {
+        if (/\d/.test(score)) {
             number += score.toString();
             continue;
         }
