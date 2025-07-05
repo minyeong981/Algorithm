@@ -15,8 +15,6 @@ function solution(m, n, board) {
                 for (let k = 0; k < 3; k++) {
                     let newR = i + directions[k][0], newC = j + directions[k][1];
                     if (
-                        0 <= newR && newR < m &&
-                        0 <= newC && newC < n &&
                         array[newR][newC] === character
                     ) {
                         position.add(`(${newR},${newC})`);
