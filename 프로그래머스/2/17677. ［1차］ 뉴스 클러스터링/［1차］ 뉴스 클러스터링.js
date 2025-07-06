@@ -23,9 +23,7 @@ function solution(str1, str2) {
     for (const [key, value] of s2Map) {
         if (s1Map.has(key)) {
             const count = Math.min(s1Map.get(key), value);
-            for (let i = 0; i < count; i++) {
-                intersectionCount++;
-            }
+            intersectionCount += count;
         }
     }
     
